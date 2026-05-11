@@ -1,0 +1,34 @@
+{
+	"pathGeometry"          : "Geometry",
+	"pathNotation"          : "Geometry.Notation",
+	"pathRelations"         : "Geometry.Relations",
+
+	"nameAngle"             : "Angle",
+	"leafAngle"             : "Angle (∠ABC)",
+	"childAnglePoint"       : "Point",
+
+	"nameTriangle"          : "Triangle",
+	"leafTriangle"          : "Triangle (△ABC)",
+	"childTriangleVertex"   : "Vertex",
+
+	"nameParallel"          : "Parallel",
+	"leafParallel"          : "Parallel (AB ∥ CD)",
+	"operatorParallel"      : " ∥ ",
+
+	"namePerpendicular"     : "Perpendicular",
+	"leafPerpendicular"     : "Perpendicular (AB ⊥ CD)",
+	"operatorPerpendicular" : " ⊥ ",
+
+	"nameArc"               : "Arc",
+	"leafArc"               : "Arc (⌢AB)",
+	"childAccentLabel"      : "Label",
+
+	"nameSegment"           : "Segment",
+	"leafSegment"           : "Segment (AB̄)",
+
+	"nameRay"               : "Ray",
+	"leafRay"               : "Ray (AB→)",
+
+	"nameLine"              : "Line",
+	"leafLine"              : "Line (AB↔)"
+}

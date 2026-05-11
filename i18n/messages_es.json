@@ -1,0 +1,34 @@
+{
+	"pathGeometry"          : "Geometría",
+	"pathNotation"          : "Geometría.Notación",
+	"pathRelations"         : "Geometría.Relaciones",
+
+	"nameAngle"             : "Ángulo",
+	"leafAngle"             : "Ángulo (∠ABC)",
+	"childAnglePoint"       : "Punto",
+
+	"nameTriangle"          : "Triángulo",
+	"leafTriangle"          : "Triángulo (△ABC)",
+	"childTriangleVertex"   : "Vértice",
+
+	"nameParallel"          : "Paralelas",
+	"leafParallel"          : "Paralelas (AB ∥ CD)",
+	"operatorParallel"      : " ∥ ",
+
+	"namePerpendicular"     : "Perpendiculares",
+	"leafPerpendicular"     : "Perpendiculares (AB ⊥ CD)",
+	"operatorPerpendicular" : " ⊥ ",
+
+	"nameArc"               : "Arco",
+	"leafArc"               : "Arco (⌢AB)",
+	"childAccentLabel"      : "Etiqueta",
+
+	"nameSegment"           : "Segmento",
+	"leafSegment"           : "Segmento (AB̄)",
+
+	"nameRay"               : "Rayo",
+	"leafRay"               : "Rayo (AB→)",
+
+	"nameLine"              : "Recta",
+	"leafLine"              : "Recta (AB↔)"
+}
