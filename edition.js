@@ -16,13 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-'use strict';
+"use strict";
 
 export class GeometryPackage extends Formulae.EditionPackage {};
 
 GeometryPackage.setEditions = function() {
 	// ─── Notation ───────────────────────────────────────────────────────────────
-
+	
 	Formulae.addEdition(
 		this.messages.pathNotation, null, this.messages.leafAngle,
 		() => Expression.wrapperEdition("Geometry.Angle")
@@ -47,9 +47,9 @@ GeometryPackage.setEditions = function() {
 		this.messages.pathNotation, null, this.messages.leafLine,
 		() => Expression.wrapperEdition("Geometry.Line")
 	);
-
+	
 	// ─── Relations ──────────────────────────────────────────────────────────────
-
+	
 	Formulae.addEdition(
 		this.messages.pathRelations, null, this.messages.leafParallel,
 		() => Expression.binaryEdition("Geometry.Parallel", false)

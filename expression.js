@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-'use strict';
+"use strict";
 
 export class GeometryPackage extends Formulae.ExpressionPackage {};
 
@@ -31,48 +31,48 @@ const LINE_THICK_FRAC = 0.06;  // line stroke width as fraction of fontSize
 
 const GeometryPrefixBase = class extends Expression {
 	getPrefix() { return ""; }
-
+	
 	prepareDisplay(context) {
 		const fontSize = context.fontInfo.size;
 		const gap      = Math.round(fontSize * PREFIX_GAP_FRAC);
 		this.gpPrefixW = Math.ceil(context.measureText(this.getPrefix()).width);
-
+		
 		let maxBaseline = Math.round(fontSize / 2);
 		let maxBelow    = Math.round(fontSize / 2);
-
+		
 		for (const ch of this.children) {
 			ch.prepareDisplay(context);
 			if (ch.horzBaseline > maxBaseline) maxBaseline = ch.horzBaseline;
 			if (ch.height - ch.horzBaseline > maxBelow) maxBelow = ch.height - ch.horzBaseline;
 		}
-
+		
 		this.horzBaseline = maxBaseline;
-
+		
 		let x = this.gpPrefixW + gap;
 		for (const ch of this.children) {
 			ch.x = x;
 			ch.y = this.horzBaseline - ch.horzBaseline;
 			x += ch.width;
 		}
-
+		
 		this.width        = x;
 		this.height       = this.horzBaseline + maxBelow;
 		this.vertBaseline = Math.round(this.width / 2);
 	}
-
+	
 	display(context, x, y) {
 		super.drawText(context, this.getPrefix(), x, y + this.horzBaseline + Math.round(context.fontInfo.size / 2));
 		for (const ch of this.children) {
 			ch.display(context, x + ch.x, y + ch.y);
 		}
 	}
-
+	
 	moveTo(direction) {
 		return direction === Expression.PREVIOUS
 			? this.children[this.children.length - 1].moveTo(direction)
 			: this.children[0].moveTo(direction);
 	}
-
+	
 	moveAcross(i, direction) {
 		if (direction === Expression.NEXT     && i < this.children.length - 1) return this.children[i + 1].moveTo(direction);
 		if (direction === Expression.PREVIOUS && i > 0)                        return this.children[i - 1].moveTo(direction);
@@ -106,37 +106,37 @@ const Triangle = class extends GeometryPrefixBase {
 const AccentOver = class extends Expression {
 	canHaveChildren(count) { return count === 1; }
 	getChildName(i)        { return GeometryPackage.messages.childAccentLabel; }
-
+	
 	prepareDisplay(context) {
 		const fontSize  = context.fontInfo.size;
 		const accentH   = Math.round(fontSize * ACCENT_H_FRAC);
 		const lineWidth = Math.max(1, Math.round(fontSize * LINE_THICK_FRAC));
 		const arrowW    = Math.max(4, Math.round(fontSize * ARROW_W_FRAC));
-
+		
 		const ch0 = this.children[0];
 		ch0.prepareDisplay(context);
-
+		
 		this.aoAccentH   = accentH;
 		this.aoLineWidth = lineWidth;
 		this.aoArrowW    = arrowW;
-
+		
 		ch0.x = 0;
 		ch0.y = accentH + ACCENT_GAP;
-
+		
 		this.width        = ch0.width;
 		this.height       = accentH + ACCENT_GAP + ch0.height;
 		this.horzBaseline = accentH + ACCENT_GAP + ch0.horzBaseline;
 		this.vertBaseline = Math.round(this.width / 2);
 	}
-
+	
 	display(context, x, y) {
 		this.drawAccent(context, x, y, this.width, this.aoAccentH, this.aoLineWidth, this.aoArrowW);
 		const ch0 = this.children[0];
 		ch0.display(context, x + ch0.x, y + ch0.y);
 	}
-
+	
 	drawAccent(context, x, y, width, accentH, lineWidth, arrowW) {}
-
+	
 	moveTo(direction)        { return this.children[0].moveTo(direction); }
 	moveAcross(i, direction) { return this.moveOut(direction); }
 };
@@ -146,7 +146,7 @@ const AccentOver = class extends Expression {
 const Segment = class extends AccentOver {
 	getTag()  { return "Geometry.Segment"; }
 	getName() { return GeometryPackage.messages.nameSegment; }
-
+	
 	drawAccent(context, x, y, width, accentH, lineWidth, arrowW) {
 		const lineY = y + Math.round(accentH / 2);
 		context.save();
@@ -164,7 +164,7 @@ const Segment = class extends AccentOver {
 const Arc = class extends AccentOver {
 	getTag()  { return "Geometry.Arc"; }
 	getName() { return GeometryPackage.messages.nameArc; }
-
+	
 	drawAccent(context, x, y, width, accentH, lineWidth, arrowW) {
 		context.save();
 		context.lineWidth = lineWidth;
@@ -182,7 +182,7 @@ const Arc = class extends AccentOver {
 const Ray = class extends AccentOver {
 	getTag()  { return "Geometry.Ray"; }
 	getName() { return GeometryPackage.messages.nameRay; }
-
+	
 	drawAccent(context, x, y, width, accentH, lineWidth, arrowW) {
 		const lineY = y + Math.round(accentH / 2);
 		context.save();
@@ -205,7 +205,7 @@ const Ray = class extends AccentOver {
 const Line = class extends AccentOver {
 	getTag()  { return "Geometry.Line"; }
 	getName() { return GeometryPackage.messages.nameLine; }
-
+	
 	drawAccent(context, x, y, width, accentH, lineWidth, arrowW) {
 		const lineY = y + Math.round(accentH / 2);
 		context.save();
@@ -232,7 +232,7 @@ const Line = class extends AccentOver {
 GeometryPackage.setExpressions = function(module) {
 	Formulae.setExpression(module, "Geometry.Angle",    Angle);
 	Formulae.setExpression(module, "Geometry.Triangle", Triangle);
-
+	
 	Formulae.setExpression(module, "Geometry.Parallel", {
 		clazz:       Expression.Infix,
 		getTag:      () => "Geometry.Parallel",
@@ -240,7 +240,7 @@ GeometryPackage.setExpressions = function(module) {
 		getName:     () => GeometryPackage.messages.nameParallel,
 		min: -2, max: 2
 	});
-
+	
 	Formulae.setExpression(module, "Geometry.Perpendicular", {
 		clazz:       Expression.Infix,
 		getTag:      () => "Geometry.Perpendicular",
@@ -248,9 +248,10 @@ GeometryPackage.setExpressions = function(module) {
 		getName:     () => GeometryPackage.messages.namePerpendicular,
 		min: 2, max: 2
 	});
-
+	
 	Formulae.setExpression(module, "Geometry.Arc",     Arc);
 	Formulae.setExpression(module, "Geometry.Segment", Segment);
 	Formulae.setExpression(module, "Geometry.Ray",     Ray);
 	Formulae.setExpression(module, "Geometry.Line",    Line);
 };
+
