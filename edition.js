@@ -22,42 +22,16 @@ export class GeometryPackage extends Formulae.EditionPackage {};
 
 GeometryPackage.setEditions = function() {
 	// ─── Notation ───────────────────────────────────────────────────────────────
-	
-	Formulae.addEdition(
-		this.messages.pathNotation, null, this.messages.leafAngle,
-		() => Expression.wrapperEdition("Geometry.Angle")
-	);
-	Formulae.addEdition(
-		this.messages.pathNotation, null, this.messages.leafTriangle,
-		() => Expression.multipleEdition("Geometry.Triangle", 3, 0)
-	);
-	Formulae.addEdition(
-		this.messages.pathNotation, null, this.messages.leafArc,
-		() => Expression.wrapperEdition("Geometry.Arc")
-	);
-	Formulae.addEdition(
-		this.messages.pathNotation, null, this.messages.leafSegment,
-		() => Expression.wrapperEdition("Geometry.Segment")
-	);
-	Formulae.addEdition(
-		this.messages.pathNotation, null, this.messages.leafRay,
-		() => Expression.wrapperEdition("Geometry.Ray")
-	);
-	Formulae.addEdition(
-		this.messages.pathNotation, null, this.messages.leafLine,
-		() => Expression.wrapperEdition("Geometry.Line")
-	);
-	
+	Formulae.addEdition(this.messages.pathNotation, Formulae.icon("Geometry.Angle",    1), this.messages.leafAngle,    () => Expression.wrapperEdition("Geometry.Angle"));
+	Formulae.addEdition(this.messages.pathNotation, Formulae.icon("Geometry.Triangle", 3), this.messages.leafTriangle, () => Expression.multipleEdition("Geometry.Triangle", 3, 0));
+	Formulae.addEdition(this.messages.pathNotation, Formulae.icon("Geometry.Arc",      1), this.messages.leafArc,      () => Expression.wrapperEdition("Geometry.Arc"));
+	Formulae.addEdition(this.messages.pathNotation, Formulae.icon("Geometry.Segment",  1), this.messages.leafSegment,  () => Expression.wrapperEdition("Geometry.Segment"));
+	Formulae.addEdition(this.messages.pathNotation, Formulae.icon("Geometry.Ray",      1), this.messages.leafRay,      () => Expression.wrapperEdition("Geometry.Ray"));
+	Formulae.addEdition(this.messages.pathNotation, Formulae.icon("Geometry.Line",     1), this.messages.leafLine,     () => Expression.wrapperEdition("Geometry.Line"));
+
 	// ─── Relations ──────────────────────────────────────────────────────────────
-	
-	Formulae.addEdition(
-		this.messages.pathRelations, null, this.messages.leafParallel,
-		() => Expression.binaryEdition("Geometry.Parallel", false)
-	);
-	Formulae.addEdition(
-		this.messages.pathRelations, null, this.messages.leafPerpendicular,
-		() => Expression.binaryEdition("Geometry.Perpendicular", false)
-	);
+	Formulae.addBinaryEdition(this.messages, "Relations", "Parallel",      "Geometry.Parallel");
+	Formulae.addBinaryEdition(this.messages, "Relations", "Perpendicular", "Geometry.Perpendicular");
 };
 
 GeometryPackage.setActions = function() {};
